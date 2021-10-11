@@ -23,3 +23,6 @@ steps:
   - '--allow-unauthenticated'
 images:
   - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular'
+  
+options:
+ logging: CLOUD_LOGGING_ONLY
