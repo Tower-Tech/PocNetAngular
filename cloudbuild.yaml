@@ -1,0 +1,25 @@
+steps:
+
+#build docker container
+- name: 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository'
+  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular', '.']
+
+#push container to container registry
+- name: 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository'
+  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular']
+
+#deploy to cloud run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'cloudrunservice'
+  - '--image'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular'
+  - '--region'
+  - 'europe-central2'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+images:
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular'
