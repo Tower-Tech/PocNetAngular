@@ -1,5 +1,13 @@
 steps:
 
+#build docker container
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA', '.']
+
+#push container to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA']
+
 #deploy to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
