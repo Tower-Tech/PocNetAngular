@@ -17,7 +17,7 @@ steps:
   - '--image'
   - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA'
   - '--port'
-  - '5001'
+  - '80'
   - '--region'
   - 'europe-central2'
   - '--platform'
