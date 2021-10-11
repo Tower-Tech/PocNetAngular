@@ -2,21 +2,20 @@ steps:
 
 #build docker container
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211', '.']
+  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA', '.']
 
 #push container to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211']
+  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA']
 
 #deploy to Cloud Run
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
+- name: 'gcr.io/cloud-builders/gcloud'
   args:
   - 'run'
   - 'deploy'
   - 'poc-angular'
   - '--image'
-  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211'
   - '--region'
   - 'europe-central2'
   - '--platform'
