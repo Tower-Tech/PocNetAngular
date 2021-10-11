@@ -1,11 +1,11 @@
 steps:
 
 #build docker container
-- name: 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository'
+- name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular', '.']
 
 #push container to container registry
-- name: 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository'
+- name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular']
 
 #deploy to cloud run
