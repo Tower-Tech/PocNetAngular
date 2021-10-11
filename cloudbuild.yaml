@@ -15,16 +15,16 @@ steps:
   - 'deploy'
   - 'poc-angular'
   - '--image'
-  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA'
   - '--port'
-  - '80'
+  - '5001'
   - '--region'
   - 'europe-central2'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
 images:
-  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA'
   
 options:
  logging: CLOUD_LOGGING_ONLY
