@@ -2,27 +2,28 @@ steps:
 
 #build docker container
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular', '.']
+  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211', '.']
 
-#push container to container registry
+#push container to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular']
+  args: [ 'push', 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211']
 
-#deploy to cloud run
-- name: 'gcr.io/cloud-builders/gcloud'
+#deploy to Cloud Run
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
   args:
   - 'run'
   - 'deploy'
-  - 'cloudrunservice'
+  - 'poc-angular'
   - '--image'
-  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular:$SHORT_SHA'
   - '--region'
   - 'europe-central2'
   - '--platform'
   - 'managed'
   - '--allow-unauthenticated'
 images:
-  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/poc-angular'
+  - 'europe-central2-docker.pkg.dev/dev-project-sd/sd-repository/selam-e2@sha256:c0fc072da36c6df1de1890d0be252064e5a252ec96372f0a79ea676396a7c211'
   
 options:
  logging: CLOUD_LOGGING_ONLY
